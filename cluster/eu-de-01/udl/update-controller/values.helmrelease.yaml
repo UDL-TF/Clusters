@@ -7,11 +7,23 @@ spec:
   chartRef:
     kind: OCIRepository
     name: update-controller
-    namespace: udl
+    namespace: default
   interval: 10m
+  targetNamespace: udl
   values:
     config:
       podSelector: "update=udl"
       namespace: "udl"
     namespace:
       create: false
+      name: udl
+    persistence:
+      enabled: true
+      type: hostPath
+      hostPath:
+        path: "/mnt/tf2"
+        type: DirectoryOrCreate
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
