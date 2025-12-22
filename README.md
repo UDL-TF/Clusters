@@ -1,16 +1,24 @@
 # Clusters
 
-A GitOps-managed infrastructure repository that defines Kubernetes cluster configurations and deployments for UDL's global game server infrastructure.
+A GitOps-managed infrastructure repository template for defining Kubernetes cluster configurations and deployments across a global game server footprint.
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ## Overview
 
-The Clusters repository serves as the central source of truth for deploying and managing UDL's game server infrastructure across multiple geographic regions. It leverages GitOps principles with Flux CD for automated deployment and configuration management of Kubernetes clusters.
+The repository serves as the central source of truth for deploying and managing a global game server infrastructure across multiple geographic regions. It leverages GitOps principles with Flux CD for automated deployment and configuration management of Kubernetes clusters.
 
-This repository contains cluster-specific configurations, Helm releases, and namespace definitions that orchestrate the deployment of game server controllers (update-controller, restart-controller) and related services. By maintaining infrastructure as code, it enables version-controlled, reproducible deployments across all UDL clusters while ensuring consistency and reliability.
+Each cluster path houses Flux artifacts, Helm releases, and namespace-scoped manifests that orchestrate controllers (update-controller, restart-controller) and supporting services. By maintaining infrastructure as code, it enables version-controlled, reproducible deployments across every cluster while ensuring consistency and reliability.
 
-The repository follows a structured hierarchy based on geographic regions and cluster identifiers, making it easy to scale infrastructure globally while maintaining clear separation of concerns between different environments and regions.
+The hierarchy is intentionally generic—organized by region and cluster identifiers—so organizations can scale infrastructure globally while keeping clear separation of concerns between environments, namespaces, and services.
+
+## Visualization Guide
+
+- **Architecture Graph**: Highlights how repository assets feed Flux CD and how Helm releases populate namespaces.
+- **Global Cluster Topology**: Shows how multiple regional clusters inherit the same GitOps workflow.
+- **GitOps Deployment Flow**: Sequence diagram outlining end-to-end reconciliation.
+- **Cluster Lifecycle State Machine**: Communicates operational states and transitions for each cluster.
+- **Artifact Relationship Graph**: Details dependencies between Flux sources, Helm releases, and workloads.
 
 ### Key Responsibilities
 
@@ -24,38 +32,94 @@ The repository follows a structured hierarchy based on geographic regions and cl
 ```mermaid
 graph TB
     subgraph "Git Repository"
-        Repo[Clusters Repository]
-        Repo --> Cluster1[cluster/eu-de-01]
+        Repo[(clusters/)]
+        Repo --> RegionPath[cluster/<region>-<country>-<id>]
+        RegionPath --> NamespacePath[udl/<service>]
     end
-    
-    subgraph "Cluster: eu-de-01.udl.tf"
-        FluxCD[Flux CD]
-        
-        subgraph "Helm Releases"
-            UC_Helm[update-controller-helm.yaml]
-            RC_Helm[restart-controller-helm.yaml]
-        end
-        
-        subgraph "Namespace: udl"
-            NS[namespace.yaml]
-            UC[Update Controller]
-            RC[Restart Controller]
-            Servers[Game Servers]
-        end
+
+    subgraph "Flux Runtime"
+        FluxCD[Flux CD Controllers]
+        HelmCtrl[Helm Controller]
     end
-    
-    Repo -->|Monitors| FluxCD
-    FluxCD -->|Deploys| UC_Helm
-    FluxCD -->|Deploys| RC_Helm
-    UC_Helm -->|Creates| UC
-    RC_Helm -->|Creates| RC
-    NS -->|Defines| Servers
+
+    subgraph "Cluster Workloads"
+        Namespace[Namespace Definition]
+        UC[Update Controller Deployment]
+        RC[Restart Controller Deployment]
+        Servers[Game Server Pods]
+    end
+
+    Repo -->|Source| FluxCD
+    FluxCD -->|Reconciles| HelmCtrl
+    HelmCtrl -->|Applies| Namespace
+    HelmCtrl -->|Applies| UC
+    HelmCtrl -->|Applies| RC
     UC -->|Manages Updates| Servers
     RC -->|Manages Restarts| Servers
-    
-    style Repo fill:#1a4d6d
-    style FluxCD fill:#6d1a1a
-    style NS fill:#1a6d1a
+    Namespace -->|Scopes| Servers
+
+    style Repo fill:#1a4d6d,stroke:#0e2b40,stroke-width:1px,color:#fff
+    style FluxCD fill:#6d1a1a,stroke:#2d0909,stroke-width:1px,color:#fff
+    style Namespace fill:#1a6d1a,stroke:#0b330b,stroke-width:1px,color:#fff
+```
+
+### Global Cluster Topology
+
+```mermaid
+graph LR
+    subgraph GitOps Control Plane
+        Repo[(Clusters Repo)]
+        FluxHub[Flux Controllers]
+    end
+
+    subgraph Europe
+        EU1[eu-de-01]
+        EU2[eu-fi-02]
+    end
+
+    subgraph North_America
+        NA1[us-va-01]
+        NA2[ca-qc-02]
+    end
+
+    subgraph Asia_Pacific
+        AP1[ap-jp-01]
+    end
+
+    Repo --> FluxHub
+    FluxHub --> EU1
+    FluxHub --> EU2
+    FluxHub --> NA1
+    FluxHub --> NA2
+    FluxHub --> AP1
+
+    classDef cluster fill:#0f4c81,color:#fff
+    class EU1,EU2,NA1,NA2,AP1 cluster
+```
+
+### Artifact Relationship Graph
+
+```mermaid
+graph TD
+    GitRepo[(Git Repository)]
+    HelmRepo[HelmRepository]
+    OCIRepo[OCIRepository]
+    HR[HelmRelease]
+    Secret[SealedSecret]
+    Workloads[Deployments/Jobs]
+
+    GitRepo --> HelmRepo
+    GitRepo --> OCIRepo
+    HelmRepo --> HR
+    OCIRepo --> HR
+    HR --> Secret
+    HR --> Workloads
+    Secret --> Workloads
+
+    classDef artifact fill:#183d3d,color:#fff
+    classDef runtime fill:#205e5e,color:#fff
+    class HelmRepo,OCIRepo,HR artifact
+    class Workloads runtime
 ```
 
 ## How It Works
@@ -107,7 +171,7 @@ stateDiagram-v2
 
 - **Geographic Distribution**: Support for multi-region deployments using ISO 3166-1 Alpha-2 country codes for consistent global infrastructure
 - **Flux CD Integration**: Automated GitOps-based deployments with HelmRelease CRDs for declarative infrastructure management
-- **Standardized Naming**: Hierarchical naming convention `[region]-[country_code]-[cluster_id].udl.tf` for clear cluster identification
+- **Standardized Naming**: Hierarchical naming convention `[region]-[country_code]-[cluster_id].<org-domain>` for clear cluster identification
 - **Controller Orchestration**: Centralized deployment of update-controller and restart-controller for game server lifecycle management
 - **Namespace Isolation**: Logical separation of services within dedicated namespaces (e.g., `udl` namespace)
 - **Helm Values Customization**: Per-cluster Helm value overrides for environment-specific configurations
@@ -120,7 +184,7 @@ stateDiagram-v2
 
 - Kubernetes cluster (v1.25+) with appropriate RBAC permissions
 - Flux CD v2 installed and configured on target clusters
-- Access to UDL's OCI registry for Helm charts
+- Access to the organization's OCI registry (or equivalent) for Helm charts
 - Git access to the Clusters repository
 - `kubectl` CLI tool for manual operations (optional)
 
@@ -149,11 +213,11 @@ stateDiagram-v2
 
 4. **Bootstrap Flux CD** (on the cluster):
    ```bash
-   flux bootstrap github \
-     --owner=UDL-TF \
-     --repository=Clusters \
-     --branch=main \
-     --path=cluster/[region]-[country_code]-[cluster_id]
+     flux bootstrap github \
+         --owner=<github-org> \
+         --repository=Clusters \
+         --branch=main \
+         --path=cluster/[region]-[country_code]-[cluster_id]
    ```
 
 5. **Commit and push**:
@@ -171,12 +235,12 @@ Flux CD will automatically detect the changes and deploy the defined resources t
 
 **Top-level cluster DNS**:
 ```
-[region]-[country_code]-[cluster_id].udl.tf
+[region]-[country_code]-[cluster_id].<org-domain>
 ```
 
 **Node-level DNS** (for reference):
 ```
-n[node_id].[region]-[country_code]-[cluster_id].udl.tf
+n[node_id].[region]-[country_code]-[cluster_id].<org-domain>
 ```
 
 Where:
@@ -185,7 +249,7 @@ Where:
 - `cluster_id`: Two-digit cluster identifier (e.g., `01`, `02`)
 - `node_id`: Node number within the cluster
 
-**Example**: `eu-de-01.udl.tf` (Europe, Germany, Cluster 01)
+**Example**: `eu-de-01.gameinfra.example` (Europe, Germany, Cluster 01)
 
 ### Directory Structure Conventions
 
@@ -236,5 +300,5 @@ See [LICENSE](LICENSE) file for details.
 
 - [Flux CD v2](https://fluxcd.io/) - GitOps toolkit for Kubernetes
 - [Helm](https://helm.sh/) - Kubernetes package manager
-- [update-controller](https://github.com/UDL-TF) - Controller for managing game server updates
-- [restart-controller](https://github.com/UDL-TF) - Controller for managing game server restarts
+- [update-controller](https://github.com/UDL-TF) or equivalent service - Controller for managing game server updates
+- [restart-controller](https://github.com/UDL-TF) or equivalent service - Controller for managing game server restarts
