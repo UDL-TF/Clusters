@@ -188,6 +188,67 @@ stateDiagram-v2
 - Git access to the Clusters repository
 - `kubectl` CLI tool for manual operations (optional)
 
+## Secret Workflow
+
+Secrets follow a three-file convention and can live anywhere in the repo alongside the workloads that consume them:
+
+- `.sops.yaml`: encrypted source of truth (Age recipients defined in `.sops.yaml`)
+- `.secret.yaml`: decrypted Kubernetes Secret manifest generated on demand; git-ignored via the policy in [.gitignore](.gitignore#L1-L2)
+- `.sealed.yaml`: kubesealed secret committed to Git for Flux to apply
+
+### Command Reference
+
+All automation lives in [Taskfile.yaml](Taskfile.yaml).
+
+- `task prereqs` – verify `sops`, `kubeseal`, and `ssh-to-age`
+- `task key:print` – print your Age public key derived from `SSH_KEY`
+- `task key:add-user USER=<github>` – fetch and display a teammate's Age key for `.sops.yaml`
+- `task secrets:edit FILE=<path>` – open the encrypted file with SOPS (accepts any of the three extensions)
+- `task secrets:decrypt [FILE=<path>]` – (re)generate `.secret.yaml` files locally
+- `task secrets:checkout [FILE=<path>]` – alias for decrypt when you want to “open” the entire tree
+- `task secrets:checkin [FILE=<path>]` – re-encrypt newer `.secret.yaml` files back into their `.sops.yaml`
+- `task secrets:seal [FILE=<path>]` – seal secrets into `.sealed.yaml` (auto-decrypts if the plaintext is missing)
+- `task secrets:seal-changed [FILE=<path>]` – reseal only when the `.sops.yaml` (or plaintext) is newer than the current `.sealed.yaml`
+- `task secrets:sync [FILE=<path>]` – convenience wrapper that runs decrypt + seal
+- `task secrets:roundtrip [FILE=<path>]` – checkout, pause for edits, checkin, then reseal anything that changed
+- `task secrets:clean [FILE=<path>]` – remove generated plaintext secrets
+- `task secrets:rotate [FILE=<path>]` – run `sops updatekeys -y` to refresh recipients
+
+You can scope any of the `secrets:*` tasks to a single resource by supplying `FILE=cluster/eu-de-01/udl/advanced-one/something.secret.yaml` (or the `.sops/.sealed` variants). Without `FILE`, the commands walk the repo and operate on every `.sops.yaml` they find.
+
+To touch everything in one shot:
+
+```bash
+# Open (decrypt) the full tree
+task secrets:checkout
+
+# After editing plaintext secrets, push changes back into encryption
+task secrets:checkin
+
+# Seal only the files whose encrypted source changed
+task secrets:seal-changed
+```
+
+Prefer a guided flow? Run `task secrets:roundtrip` to perform the same checkout → edit pause → checkin → reseal sequence with a single command (you can still scope it via `FILE=`).
+
+### Typical Flow
+
+```bash
+# 1. Edit or create the encrypted payload
+task secrets:edit FILE=cluster/eu-de-01/udl/advanced-one/something
+
+# 2. Materialize plaintext for inspection or local tooling (remains untracked)
+task secrets:decrypt FILE=cluster/eu-de-01/udl/advanced-one/something
+
+# 3. Produce the Git-committed object Flux will reconcile
+task secrets:seal FILE=cluster/eu-de-01/udl/advanced-one/something
+
+# 4. (Recommended) Clean up plaintext from disk once finished
+task secrets:clean FILE=cluster/eu-de-01/udl/advanced-one/something
+```
+
+Run `task secrets:sync` to chain steps 2 and 3 automatically, and repeat `task secrets:seal` whenever controller certificates rotate or cluster contexts change.
+
 ## Installation
 
 ### Setting Up a New Cluster
