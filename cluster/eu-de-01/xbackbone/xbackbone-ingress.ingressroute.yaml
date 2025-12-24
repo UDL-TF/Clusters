@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: xbackbone-ingress
+  namespace: xbackbone
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`xbackbone.udl.tf`)
+      kind: Rule
+      services:
+        - name: xbackbone
+          port: 80
+  tls:
+    secretName: xbackbone-tls

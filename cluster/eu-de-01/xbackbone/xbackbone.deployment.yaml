@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xbackbone
+  namespace: xbackbone
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: xbackbone
+  template:
+    metadata:
+      labels:
+        app: xbackbone
+    spec:
+      containers:
+        - name: xbackbone
+          image: lscr.io/linuxserver/xbackbone:latest
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Stockholm"
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          volumeMounts:
+            - name: data
+              mountPath: /config
+      volumes:
+        - name: data
+          hostPath:
+            path: /mnt/xbackbone
+            type: DirectoryOrCreate
