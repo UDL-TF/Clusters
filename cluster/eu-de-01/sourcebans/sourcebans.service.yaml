@@ -1,0 +1,16 @@
+---
+# SourceBans Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: sourcebans-service
+  namespace: sourcebans
+spec:
+  selector:
+    app: sourcebans
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: ClusterIP

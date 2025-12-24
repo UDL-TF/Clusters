@@ -1,0 +1,47 @@
+---
+# SourceBans IngressRoute (Traefik CRD)
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sourcebans-ingressroute
+  namespace: sourcebans
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`bans.udl.tf`)
+      kind: Rule
+      services:
+        - name: sourcebans-service
+          port: 80
+  tls:
+    secretName: sourcebans-tls
+---
+# HTTP to HTTPS redirect
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sourcebans-redirect
+  namespace: sourcebans
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`bans.udl.tf`)
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+      middlewares:
+        - name: https-redirect
+---
+# HTTPS redirect middleware
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: https-redirect
+  namespace: sourcebans
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true

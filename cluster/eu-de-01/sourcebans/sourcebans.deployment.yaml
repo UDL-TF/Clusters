@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sourcebans
+  namespace: sourcebans
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sourcebans
+  template:
+    metadata:
+      labels:
+        app: sourcebans
+    spec:
+      containers:
+        - name: sourcebans
+          image: crinis/sourcebans:latest
+          env:
+            - name: INSTALL
+              value: "false"
+            - name: SET_OWNER
+              value: "true"
+          ports:
+            - containerPort: 8080
+              name: http
+          volumeMounts:
+            - name: sourcebans-data
+              mountPath: /var/www/html/
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+      volumes:
+        - name: sourcebans-data
+          hostPath:
+            path: /mnt/sourcebans/data
+            type: DirectoryOrCreate
