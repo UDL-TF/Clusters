@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apache-config
+  namespace: udl
+data:
+  000-default.conf: |
+    <VirtualHost *:80>
+        DocumentRoot /var/www/html
+        
+        <Directory /var/www/html>
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            Require all granted
+            IndexIgnore serve.php
+        </Directory>
+        
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
