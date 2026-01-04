@@ -26,32 +26,18 @@ spec:
             - sh
             - -c
             - |
-              set -e
-              echo "Installing iptables..."
-              apk add --no-cache iptables 2>&1
-              
-              echo "Setting up port forwarding rules..."
-              # Forward incoming traffic from external sources
-              iptables -t nat -A PREROUTING -p udp --dport 28015 -j REDIRECT --to-port 27015 2>&1 || echo "PREROUTING rule failed, continuing..."
-              
-              # Forward traffic originating from the host
-              iptables -t nat -A OUTPUT -p udp --dport 28015 -j REDIRECT --to-port 27015 2>&1 || echo "OUTPUT rule failed, continuing..."
-              
-              echo "Port forwarding rules applied successfully"
-              echo "Forwarding UDP port 28015 -> 27015"
-              
-              # Keep container running and show rules
-              iptables -t nat -L -n -v
-              
-              echo "Container running, keeping alive..."
-              tail -f /dev/null
+              apk add --no-cache iptables
+              iptables -t nat -A PREROUTING -p udp --dport 28015 -j REDIRECT --to-port 27015 || true
+              iptables -t nat -A OUTPUT -p udp --dport 28015 -j REDIRECT --to-port 27015 || true
+              echo "Port forwarding: 28015 -> 27015"
+              exec tail -f /dev/null
           securityContext:
             capabilities:
               add: ["NET_ADMIN", "NET_RAW"]
           resources:
             requests:
-              memory: "16Mi"
+              memory: "32Mi"
               cpu: "10m"
             limits:
-              memory: "32Mi"
+              memory: "64Mi"
               cpu: "50m"
