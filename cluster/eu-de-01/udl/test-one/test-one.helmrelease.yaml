@@ -109,8 +109,8 @@ spec:
         hostPathType: Directory
         readOnly: false
       - name: serverfiles-dodgeball-base
-        path: /mnt/serverfiles
-        sourcePath: serverfiles/dodgeball/base
+        path: /mnt/serverfiles/serverfiles/dodgeball/base
+        sourcePath: ""
         hostPathType: Directory
         readOnly: false
       - name: serverfiles-dodgeball-test
