@@ -74,6 +74,7 @@ spec:
       containerTarget: /tf
 
     decompressor:
+      scanBase: false
       scanOverlays: ["serverfiles-dodgeball-base"]
       cache:
         enabled: true
