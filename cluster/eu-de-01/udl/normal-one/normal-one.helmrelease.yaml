@@ -60,7 +60,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: game-server-accounts
-              key: UDL_ADVANCED_ONE
+              key: UDL_NORMAL_ONE
         - name: SRCDS_TICKRATE
           value: "128"
       command: []
