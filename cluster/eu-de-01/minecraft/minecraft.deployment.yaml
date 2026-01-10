@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-server
+  namespace: minecraft
+  labels:
+    app: minecraft-server
+spec:
+  selector:
+    matchLabels:
+      app: minecraft-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: minecraft-server
+    spec:
+      containers:
+      - env:
+        - name: EULA
+          value: "TRUE"
+        - name: TYPE
+          value: PAPER
+        - name: PAPER_BUILD
+          value: "115"
+        - name: VERSION
+          value: 1.21.11
+        - name: MEMORY
+          value: 8G
+        - name: MOTD
+          value: UDL Minecraft Server
+        - name: SPAWN_PROTECTION
+          value: "0"
+        image: itzg/minecraft-server:latest
+        imagePullPolicy: Always
+        name: minecraft-server
+        ports:
+        - containerPort: 25565
+          hostPort: 25565
+          protocol: TCP
+        - containerPort: 19132
+          hostPort: 19132
+          protocol: UDP
+        resources:
+          limits:
+            cpu: "4"
+            memory: 24Gi
+          requests:
+            cpu: "2"
+            memory: 8Gi
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+        volumeMounts:
+        - mountPath: /data
+          name: minecraft-data
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /mnt/minecraft
+          type: DirectoryOrCreate
+        name: minecraft-data
