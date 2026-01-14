@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: update-controller-test-one
+  namespace: udl
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: update-controller-test-one
+    namespace: default
+  interval: 10m
+  targetNamespace: udl
+  values:
+    config:
+      podSelector: "update=test-one"
+      namespace: "udl"
+    namespace:
+      create: false
+      name: udl
+    persistence:
+      enabled: true
+      type: hostPath
+      hostPath:
+        path: "/mnt/test-one"
+        type: DirectoryOrCreate
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000

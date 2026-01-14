@@ -147,3 +147,7 @@ spec:
 
     service:
       enabled: false
+
+    podLabels:
+      update: udl
+      restart: udl-servers

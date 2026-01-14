@@ -147,3 +147,7 @@ spec:
 
     service:
       enabled: false
+
+    podLabels:
+      update: test-one
+      restart: udl-servers
