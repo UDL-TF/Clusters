@@ -94,14 +94,15 @@ spec:
       - tf/demos
       - tf/maps
       - tf/addons/sourcemod/data
+      - tf/addons/sourcemod/configs/sourcebans
       - tf/addons/sourcemod/logs
 
-    copyTemplates:
-      - targetPath: tf/addons/sourcemod/configs/sourcebans
-        sourcePath: tf/addons/sourcemod/configs/sourcebans
-        cleanTarget: true
-        targetMode: writable
-        onlyOnInit: true
+    # copyTemplates:
+    #   - targetPath: tf/addons/sourcemod/configs/sourcebans
+    #     sourcePath: tf/addons/sourcemod/configs/sourcebans
+    #     cleanTarget: true
+    #     targetMode: writable
+    #     onlyOnInit: true
 
     permissionsInit:
       applyDuringMerge: true
