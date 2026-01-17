@@ -90,9 +90,8 @@ spec:
 
     copyTemplates:
       - targetPath: tf/addons/sourcemod/configs/sourcebans
-        overlay: serverfiles-base
-        sourcePath: serverfiles/base/addons/sourcemod/configs/sourcebans
-        cleanTarget: false
+        sourcePath: tf/test-two
+        cleanTarget: true
         targetMode: writable
         onlyOnInit: true
 
