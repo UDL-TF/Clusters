@@ -108,6 +108,8 @@ spec:
               mountPath: /ftp/test-one
             - name: test-two
               mountPath: /ftp/test-two
+            - name: test-three
+              mountPath: /ftp/test-three
             - name: udl-template
               mountPath: /ftp/udl-template
             - name: udl-stats
@@ -127,6 +129,10 @@ spec:
         - name: test-two
           hostPath:
             path: /mnt/test-two
+            type: DirectoryOrCreate
+        - name: test-three
+          hostPath:
+            path: /mnt/test-three
             type: DirectoryOrCreate
         - name: udl-template
           hostPath:
