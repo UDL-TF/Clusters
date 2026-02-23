@@ -41,6 +41,11 @@ spec:
             secretKeyRef:
               name: postgres-creds
               key: POSTGRES_PASSWORD
+        - name: SECRET_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: SECRET_PASSWORD
         - name: DB_NAME
           value: "citadel_prod"
         - name: DEMO_PATH
