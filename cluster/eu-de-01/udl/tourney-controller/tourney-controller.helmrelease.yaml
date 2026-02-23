@@ -31,6 +31,7 @@ spec:
       divisionFilters:
         - "EU"
       defaultMap: tfdb_octagon_udl_v4
+      hostNetwork: true
       notificationsEnabled: true
       notificationsLinkFormat: /matches/%d
 
