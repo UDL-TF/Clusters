@@ -124,6 +124,11 @@ spec:
         readOnly: false
       - name: serverfiles-dodgeball-advanced
         path: /mnt/serverfiles
+        sourcePath: serverfiles/dodgeball/advanced-one
+        hostPathType: Directory
+        readOnly: false
+      - name: serverfiles-dodgeball-tony
+        path: /mnt/serverfiles
         sourcePath: serverfiles/dodgeball/tony-76561198123577596
         hostPathType: Directory
         readOnly: false
