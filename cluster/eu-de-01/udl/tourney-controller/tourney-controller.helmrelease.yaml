@@ -61,10 +61,9 @@ spec:
 
     steam:
       apiKeySecret:
-        # Use existing secret for Steam API key instead of plain text
-        name: ""
-        key: "api-key"
-      appId: 440  # TF2 App ID
+        name: "steam-api"
+        key: "STEAM_WEB_API_KEY"
+      appId: 440
       autoTokens: true
       tokenCleanup: true
       tokenMemoTemplate: "UDL Match %d Round %d"
