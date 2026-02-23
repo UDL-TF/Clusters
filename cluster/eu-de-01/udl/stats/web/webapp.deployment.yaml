@@ -31,6 +31,11 @@ spec:
                 secretKeyRef:
                   name: webapp-secrets
                   key: STEAM_WEB_API_KEY
+            - name: STEAM_AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: webapp-secrets
+                  key: STEAM_AUTH_SECRET
           envFrom:
             - secretRef:
                 name: webapp-env

@@ -1,0 +1,19 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: postgres-creds
+  namespace: citadel
+spec:
+  encryptedData:
+    POSTGRES_PASSWORD: AgCYrFoSZCVlnUexya3qEyq3F8TJv5Iurnw4cSUi6htnHE5e7kl9GIYZ/AhhjKWLicx8q+xuKZq3MgS8ALgPH1qypBQ1VjDdnfH7+d4CxQ09oRwMiWPpDEilOe4YVznKMeyBk1RMaBXIkV79O/RpiG7JknAoaiXSTCscc/WP2e2+z5F/tPzzz1u68jTiuLsFxntTLi7//wlNdIA2kaQ6bs+W0DMzPJg9zayAQ+axNlG++xeu8dlnKYZqWmPB/da5A1hZt0quhp6hV85aTFxY6UpfFDpwkKJNw2k8A56kBcTdBLrJqp+RCVtmKotpcKO/MzmHvt8/9KB/XkZUVuGidYV38yuxZiQH2gUv7ezokeSYVKIziqWkcjfTftch6/+QO2rxfIjrJTXXH16Xjar1kN6lKPrOPTIUWr3/0J0kFDRJxrcPdod6BVduF3tLXP1fRm6Wm4CIwNUWk2aZkcm+2MoHZ3GClMuNGqmBKvvTops/L1czix9GTRmKjj0AyHoIYdQYl3uHZIkt/hxZJcYxKTwdSIOREqwsFIWqGgTu0pW5nZupD7yoqdP3CJ4oRSL0TnFxIYL+qsRazq9mYEVdAJIsb9PVkFWZOwJ5JOrIVJuYL68HsY/nJCDKdTcHVxXdeQ50rLAgQA1bZ8CGYrZzHXszsh5J+YmefdEQpMLQJbKIqG6oDfZDvpsy9psj7gUShJOZe5cSTjQ=
+    POSTGRES_USER: AgB70H537i0qoPBnTVPK8V9P3qW2NuNhiYQxfJXxBgx5sd0r9H/GNTZBZMhAMl12n0sSDaKYoC5BXjLC+imCgfOITZ8esBav6rlvqEWDGECtuECSHnX7aBbpFCpmx4Q3AzLDFLvuLM4UnAmoRGaMoQFABBM9fvE2CgdstKeF6Ypf0s/B40g6dDE91oU1OtGONAAsCbz+9vDL79lFMDgbGaaADgYsEuxJJ7rCH8eFE1AQNDCtzOXaDH4jTDSd7xNgyZLsS8GsmMRNDolICGGPQLZWhEmnHT8NpZ7pQzXPRAqE2hFVmijzQ0/6dg9DzNPTgMOxJdKtk+elT7pFGOty1BV8QXiRzp8au58Z1uluJpiq/o3cCg26u4Agl7CY+U9jLbyKb4m17Ul31MNoCTFyjjmDYtS5DL43PbSWZgGUYCq9WrwfbSzlsTQi9sKRiklXGwj6hcs3E6mC3CmFzc0Z2vEZhZe5JPQUsMwyymNF4f7OfkTSqQ5U04iHQyn2qHrH7pQh8uGN8ekS351P0LOv/qAKOCGtujEvQd29o7sL8V1s2Oeio8oisK11qYDGjH7QG79cAvIFhhJP6QUSAmhmeH23ry7QN8aJkjBOZvnyIpBk3UKTktvrrjAKFVXQz0jM8y7oRyELmuzEDpojayA4sVdxuBP38K6YEIb+vyayhw2PyxXVNxXEJ7+NXeBnImKWsMSdyOReWQyY5w==
+  template:
+    metadata:
+      annotations:
+        replicator.v1.mittwald.de/replicate-to: udl
+      creationTimestamp: null
+      name: postgres-creds
+      namespace: citadel
+    type: Opaque

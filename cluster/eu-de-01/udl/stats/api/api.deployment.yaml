@@ -69,6 +69,11 @@ spec:
                   name: api-secrets
                   key: TFDB_LOG_DEBUG
                   optional: true
+            - name: TFDB_ROOT_ADMIN_STEAMID
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: TFDB_ROOT_ADMIN_STEAMID
           ports:
             - containerPort: 8765
               name: api
