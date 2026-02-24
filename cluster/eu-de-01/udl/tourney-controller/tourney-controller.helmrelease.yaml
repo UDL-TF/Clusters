@@ -28,6 +28,7 @@ spec:
       chartPath: oci://ghcr.io/udl-tf/charts/tf2chart:0.3.0
       matchStatuses:
         - 0
+        - 3
       divisionFilters:
         - "EU"
       defaultMap: tfdb_octagon_udl_v4
