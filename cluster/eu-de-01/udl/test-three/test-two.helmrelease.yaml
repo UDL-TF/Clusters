@@ -1,0 +1,118 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: test-three
+  namespace: udl
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: tf2chart
+    namespace: default
+  interval: 1m
+  targetNamespace: udl
+  values:
+    workload:
+      kind: Deployment
+      nameOverride: "test-three"
+      deploymentStrategy:
+        type: Recreate
+
+    app:
+      name: test-three
+      image:
+        repository: ghcr.io/udl-tf/tf2-image
+        tag: latest
+        pullPolicy: IfNotPresent
+      ports:
+        - name: game-udp
+          containerPort: 27042
+          protocol: UDP
+        - name: sourcetv-udp
+          containerPort: 27147
+          protocol: UDP
+        - name: client-udp
+          containerPort: 37032
+          protocol: UDP
+        - name: steam-udp
+          containerPort: 26927
+          protocol: UDP
+      env:
+        - name: SRCDS_PORT
+          value: "27042"
+        - name: SRCDS_TV_PORT
+          value: "27147"
+        - name: SRCDS_CLIENT_PORT
+          value: "37032"
+        - name: SRCDS_STEAM_PORT
+          value: "26927"
+        - name: SRCDS_MAXPLAYERS
+          value: "32"
+        - name: SRCDS_RCONPW
+          valueFrom:
+            secretKeyRef:
+              name: rcon-password
+              key: RCON_PASSWORD
+        - name: SRCDS_STARTMAP
+          value: tfdb_octagon_udl_v4
+        - name: SRCDS_STATIC_HOSTNAME
+          value: "UDL.TF | EU | Test Server #3"
+        - name: SRCDS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: game-server-accounts
+              key: UDL_TEST_THREE
+              optional: true
+        - name: SRCDS_TICKRATE
+          value: "128"
+      command: []
+      args: []
+      stdin: true
+      tty: true
+
+    paths:
+      hostSource: /mnt/test-three
+      hostPathType: Directory
+      containerTarget: /tf
+
+    decompressor:
+      enabled: false
+
+    merger:
+      watcher:
+        enabled: true
+        watchParentDepth: 1
+        pollIntervalSeconds: 10
+
+    overlays:
+      - name: serverfiles-base-maps
+        path: /mnt/serverfiles
+        sourcePath: serverfiles/dodgeball/base/maps
+        hostPathType: Directory
+        readOnly: false
+
+    writablePaths:
+      - tf/logs
+      - tf/demos
+      - tf/maps
+      - tf/addons/sourcemod/data
+      - tf/addons/sourcemod/configs/sourcebans
+      - tf/addons/sourcemod/logs
+
+    permissionsInit:
+      applyDuringMerge: true
+      applyPaths:
+        - /tf
+      user: 1000
+      group: 1000
+      chmod: "775"
+
+    hostNetwork: true
+    dnsPolicy: ""
+    serviceAccountName: ""
+
+    service:
+      enabled: false
+
+    podLabels:
+      update: test-three
+      restart: udl-servers
