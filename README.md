@@ -74,27 +74,20 @@ graph LR
 
     subgraph Europe
         EU1[eu-de-01]
-        EU2[eu-fi-02]
+        EU2[eu-se-01]
     end
 
     subgraph North_America
-        NA1[us-va-01]
-        NA2[ca-qc-02]
-    end
-
-    subgraph Asia_Pacific
-        AP1[ap-jp-01]
+        NA1[na-va-01]
     end
 
     Repo --> FluxHub
     FluxHub --> EU1
     FluxHub --> EU2
     FluxHub --> NA1
-    FluxHub --> NA2
-    FluxHub --> AP1
 
     classDef cluster fill:#0f4c81,color:#fff
-    class EU1,EU2,NA1,NA2,AP1 cluster
+    class EU1,EU2,NA1 cluster
 ```
 
 ### Artifact Relationship Graph
