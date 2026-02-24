@@ -27,7 +27,9 @@ spec:
       pollInterval: 30s
       chartPath: oci://ghcr.io/udl-tf/charts/tf2chart:0.3.0
       matchStatuses:
-        - 0
+        - 0        # Active matches to process
+      matchCompletedStatuses:
+        - 3        # Completed status for orphaned server cleanup
       divisionFilters:
         - "EU"
       defaultMap: tfdb_octagon_udl_v4
