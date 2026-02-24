@@ -39,7 +39,7 @@ spec:
 
     database:
       name: citadel_prod
-      host: postgres.citadel.svc.cluster.local
+      host: postgres.citadel.svc.clusterset.local
       passwordKey: DB_PASSWORD
       existingSecret:
         name: postgres-creds  
