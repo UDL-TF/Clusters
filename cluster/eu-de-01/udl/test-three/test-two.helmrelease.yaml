@@ -86,6 +86,7 @@ spec:
         mountAsOverlay: true
         overlayName: decomp-cache
         hostPath: /mnt/dodgeball-cache
+        targetPath: /tf/tf
         hostPathType: DirectoryOrCreate
 
     merger:
