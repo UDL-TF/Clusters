@@ -11,6 +11,9 @@ spec:
   interval: 1m
   targetNamespace: udl
   values:
+    imagePullSecrets:
+      - name: ghcr-login-secret
+
     workload:
       kind: Deployment
       nameOverride: "test-three"
