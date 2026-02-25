@@ -85,14 +85,6 @@ spec:
         hostPath: /mnt/dodgeball-cache
         hostPathType: DirectoryOrCreate
 
-    copyTemplates:
-      - targetPath: tf/tf/maps
-        overlay: serverfiles-base-maps
-        sourcePath: serverfiles/dodgeball/base/maps
-        cleanTarget: false
-        targetMode: view
-        onlyOnInit: true
-
     merger:
       watcher:
         enabled: true
@@ -103,6 +95,7 @@ spec:
       - name: serverfiles-base-maps
         path: /mnt/serverfiles
         sourcePath: serverfiles/dodgeball/base/maps
+        targetPath: /tf/tf/maps
         hostPathType: Directory
         readOnly: false
 
