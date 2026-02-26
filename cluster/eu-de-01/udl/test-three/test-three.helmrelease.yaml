@@ -77,26 +77,6 @@ spec:
       hostPathType: Directory
       containerTarget: /tf
 
-    overlays:
-      - name: serverfiles-base-maps
-        path: /mnt/serverfiles
-        sourcePath: serverfiles/dodgeball/base/maps
-        targetPath: /tf/tf/maps  # .bz2 files merge here FIRST
-        hostPathType: Directory
-        readOnly: false
-
-    decompressor:
-      scanBase: false
-      scanOverlays: ["serverfiles-base-maps"]  # Scans the mounted overlay
-      cache:
-        enabled: true
-        type: hostPath
-        mountAsOverlay: true
-        overlayName: decomp-cache
-        hostPath: /mnt/dodgeball-cache
-        targetPath: /tf/tf  # Cache maps/ subdirectory overwrites /tf/tf/maps
-        hostPathType: DirectoryOrCreate
-
     merger:
       watcher:
         enabled: true
