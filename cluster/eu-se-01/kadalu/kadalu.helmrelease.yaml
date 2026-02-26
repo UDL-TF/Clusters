@@ -7,8 +7,12 @@ spec:
   interval: 1h
   chart:
     spec:
-      chart: https://github.com/kadalu/kadalu/releases/latest/download/kadalu-helm-chart.tgz
-      sourceType: oci
+      chart: kadalu-operator # The name of the chart in their repo
+      version: "1.3.0"       # The latest stable version
+      sourceRef:
+        kind: HelmRepository
+        name: kadalu-charts
+        namespace: flux-system
   install:
     createNamespace: true
   values:
