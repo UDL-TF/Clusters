@@ -1,0 +1,12 @@
+# minio-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-data
+spec:
+  accessModes:
+    - ReadWriteMany 
+  storageClassName: kadalu.s3-pool
+  resources:
+    requests:
+      storage: 150G
