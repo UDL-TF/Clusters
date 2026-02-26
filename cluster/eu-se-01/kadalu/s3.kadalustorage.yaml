@@ -1,0 +1,16 @@
+# Configuration for S3 Pool
+apiVersion: kadalu-operator.storage/v1alpha1
+kind: KadaluStorage
+metadata:
+  name: s3-pool
+spec:
+  type: Replica1
+  storage:
+    - node: n02-eu-se-01
+      path: /data/s3
+    - node: n03-eu-se-01
+      path: /data/s3
+    - node: n04-eu-se-01
+      path: /data/s3
+    - node: n05-eu-se-01
+      path: /data/s3
