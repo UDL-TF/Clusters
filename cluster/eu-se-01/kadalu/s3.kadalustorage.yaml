@@ -1,8 +1,8 @@
-# Configuration for S3 Pool
 apiVersion: kadalu-operator.storage/v1alpha1
 kind: KadaluStorage
 metadata:
   name: s3-pool
+  namespace: kadalu
 spec:
   type: Replica1
   storage:
