@@ -1,0 +1,15 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kadalu
+  namespace: kadalu
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: https://github.com/kadalu/kadalu/releases/latest/download/kadalu-helm-chart.tgz
+      sourceType: oci
+  install:
+    createNamespace: true
+  values:
+    kubernetesDistro: "kubernetes"
