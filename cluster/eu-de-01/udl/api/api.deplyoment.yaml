@@ -51,6 +51,31 @@ spec:
             secretKeyRef:
               name: api-secrets
               key: SECRET_DEMO_PASSWORD
+        - name: MINIO_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: MINIO_ENDPOINT
+        - name: MINIO_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: MINIO_ACCESS_KEY_ID
+        - name: MINIO_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: MINIO_SECRET_ACCESS_KEY
+        - name: MINIO_USE_SSL
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: MINIO_USE_SSL
+        - name: MINIO_BUCKET_NAME
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: MINIO_BUCKET_NAME
         - name: DB_NAME
           value: "citadel_prod"
         - name: DEMO_PATH
