@@ -74,6 +74,21 @@ spec:
                 secretKeyRef:
                   name: api-secrets
                   key: TFDB_ROOT_ADMIN_STEAMID
+            - name: TFDB_UNITED_API_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: TFDB_UNITED_API_BASE_URL
+            - name: TFDB_UNITED_API_SECRET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: TFDB_UNITED_API_SECRET_PASSWORD
+            - name: TFDB_DEMO_UPLOAD_TIMEOUT_SECONDS
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: TFDB_DEMO_UPLOAD_TIMEOUT_SECONDS
           ports:
             - containerPort: 8765
               name: api
