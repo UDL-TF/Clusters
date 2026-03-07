@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: ghcr.io/udl-tf/united-api
+        image: ghcr.io/udl-tf/united-api:build-14 # {"$imagepolicy": "flux-system:api-udl-build-number"}
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
