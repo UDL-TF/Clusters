@@ -4,5 +4,5 @@ metadata:
   name: api-udl
   namespace: flux-system
 spec:
-  image: ghcr.io/udl-tf/udlstats-api
+  image: ghcr.io/udl-tf/united-ap
   interval: 1m
