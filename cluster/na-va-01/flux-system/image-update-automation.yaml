@@ -20,5 +20,5 @@ spec:
     push:
       branch: main
   update:
-    path: ./cluster/eu-de-01
+    path: ./cluster/na-va-01
     strategy: Setters
