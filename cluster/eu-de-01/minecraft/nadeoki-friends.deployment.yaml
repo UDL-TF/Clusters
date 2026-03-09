@@ -32,6 +32,8 @@ spec:
           value: \u00A7fNadeoki's \u00A79F\u00A74r\u00A73i\u00A72e\u00A76n\u00A7ad\u00A7bs \u00A7f<3 <3 <3
         - name: SPAWN_PROTECTION
           value: "0"
+        - name: SERVER_PORT
+          value: "25575"
         image: itzg/minecraft-server:latest
         imagePullPolicy: Always
         name: nadeoki-friends
