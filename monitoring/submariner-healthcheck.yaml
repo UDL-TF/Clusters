@@ -1,0 +1,61 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: submariner-healthcheck
+  namespace: submariner-operator
+spec:
+  schedule: "*/5 * * * *"  # Every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: healthcheck
+            image: quay.io/submariner/subctl:v0.22.1
+            command:
+            - /bin/sh
+            - -c
+            - |
+              # Check connection status
+              if subctl show connections | grep -q "error"; then
+                echo "CRITICAL: Submariner connection error detected"
+                # Send alert to your monitoring system
+                # You can add webhook/notification logic here
+                exit 1
+              else
+                echo "OK: Submariner connections healthy"
+                exit 0
+              fi
+          restartPolicy: OnFailure
+          serviceAccountName: submariner-healthcheck
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: submariner-healthcheck
+  namespace: submariner-operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: submariner-healthcheck
+rules:
+- apiGroups: ["submariner.io"]
+  resources: ["endpoints", "clusters"]
+  verbs: ["get", "list"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: submariner-healthcheck
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: submariner-healthcheck
+subjects:
+- kind: ServiceAccount
+  name: submariner-healthcheck
+  namespace: submariner-operator

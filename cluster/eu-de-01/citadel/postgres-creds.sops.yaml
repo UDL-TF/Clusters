@@ -7,20 +7,20 @@ metadata:
     name: postgres-creds
     namespace: citadel
 stringData:
-    POSTGRES_PASSWORD: ENC[AES256_GCM,data:paIK/wNU,iv:5WSbYfQsrq9H4BvSUKQB7pLjXs/gMmXOeyyJty0rLCY=,tag:MLN0dFEcdaw1oCxHFdLvdw==,type:str]
-    POSTGRES_USER: ENC[AES256_GCM,data:zcNjJFT43hQ=,iv:Sz6VaXhsbFYzMMiUB0wSow9LwcAevaH2LHEWbg6NL54=,tag:/CyHRHkVCJfMN51ZD9bTbg==,type:str]
+    POSTGRES_PASSWORD: ENC[AES256_GCM,data:0KgCPdfP,iv:wsMwkMP2jcPBC3M8JpEMcRMnPq1NdmiMkTQRSfo8Nd8=,tag:jiORxtBWUPkmq9TGnGG/kQ==,type:str]
+    POSTGRES_USER: ENC[AES256_GCM,data:3ZXQ42TabOo=,iv:9ngTMhQeU4jI9zQRd5B0NtgDvZpkaixaLxshRMG+zr8=,tag:n9xQntb57ewDuXXf6RbB2g==,type:str]
 sops:
     age:
         - recipient: age1ck89m855d05rfv8dn2m6uf7htuqth9rhzw6glnz3k7mhhnfghf6qnkughe
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyN0RzUHA5VmM5YkoxNS9C
-            UlZOY2xranJpb2xRME1ET1U1QjBzMVovY0drCmdmNmwrbCtIRWhQanBLVHNzQStT
-            VWR1Q3VUYlBCTWQ5RVRpRzRCY24vRHcKLS0tIFVET3Rra1YweWwxY2tRaUVIeTJq
-            d0Q5bWNlYnlHd1N6VldiOTJ2Ry80d2sKm08vK7/dounj4A7jbvDX4wW55pdCHxUJ
-            j2rz9WdRCGyISD3YPH3jaIYrwcNwiQXvoM57shC8CARNTvcNYCcvZg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5bi82VUVIZnd3dUVSTXBv
+            M3VHc2dIby9qenRVaFU1WUJTK2M5K1ppWENJCkZKUWpxa0tvQVdkRkpJVVhPSVVk
+            ZVNOcml1NzRQRjdFdUsxNE5QeDRaWkEKLS0tIFkwYVJqNHFtVjB5M0ZyblYvNDRm
+            VCtSZDQzNXpXQmxjdVA5bFhDbkZMOU0K0mbgG6ZkRZrZw8vFKMKuV4+bwanSpA/x
+            3w7mHrajlfd7AURP5fht3M4tEokLDt5YjyIPoAwTMU5GE8TzPE6nEQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-03-01T18:56:34Z"
-    mac: ENC[AES256_GCM,data:Je40cZgtu7fgpJVb/sws41vgp4Opmevryf5Ych8/mUdxbKX3JU0HZBtF/0plsQhDNoQ7uClrOOsLVyivWm9rDGHPtU/VlY0Kudl05HN3QyUpiqCyzh+zQYYv7+Y4g5v/UZ8DgmrLtXomjfHC16MWqvdZkzBZZJ1lEFecvYK7rC4=,iv:lO7S2PywNNJ4iEW1vVtNDXiZDfWbTlpo38vUIUUtiWg=,tag:6oanLqJrX2W5yN4VPbPPyA==,type:str]
+    lastmodified: "2026-03-17T20:53:18Z"
+    mac: ENC[AES256_GCM,data:XWN0jQan9xxNWf3kulEeLtpSwYa/EHnp5xcq27dpu9CIb39O7fVN/s1meMjmWJ9Lv0BlamOn9GuBu+SJILbp2X3EFoLJwyH7PpDciPRSPrSw12LBVrMZj+WSRQr4W+/BiTnCtU8vwWzG4CHly8V3ldfWbyv+zS8cvcTeOrg8KEo=,iv:Umedk9jyeZWFDkDRnLys1V3pS6odbNsDAv2qJiiE8JQ=,tag:uyKDhvioYxYkACSZCKhhvw==,type:str]
     encrypted_regex: ^(data|stringData)$
     version: 3.11.0
