@@ -69,7 +69,7 @@ spec:
               name: server-passwords
               key: POPPAS_76561198777082182
         - name: SCRIM_OWNERS
-          value: "76561198777082182"
+          value: "76561198777082182,76561198104877704,76561199119823660"
         - name: SERVER_ID
           value: "Popas5898"
       command: []
