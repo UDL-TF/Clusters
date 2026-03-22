@@ -5,19 +5,19 @@ metadata:
     name: game-server-accounts
     namespace: udl
 stringData:
-    UDL_NA_ADVANCED_ONE: ENC[AES256_GCM,data:xzE3XAH0toCJyS5iluh2GJOx8mxFPlOTT8kGxhE3Pn4=,iv:90DNOnPSqOnPxhyXbK7C2KelBGu3DfeFG4lLb6kFAq0=,tag:sIwK5bSuPNMs/PjItu61Lw==,type:str]
+    UDL_NA_ADVANCED_ONE: ENC[AES256_GCM,data:O41b9DOJxV3hLQbzZqDH+bOEnVHzVZAZbZLh+iX16S8=,iv:kH5D92H90RHHC8VJkYuTDTEqbGpqgSmbfh1KwvC/3bY=,tag:VVNv6w9qo6kd3ZRXj9oXiw==,type:str]
 sops:
     age:
         - recipient: age1ck89m855d05rfv8dn2m6uf7htuqth9rhzw6glnz3k7mhhnfghf6qnkughe
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBSXJqTi82dlF4Wi8yd3JU
-            ekpYc2xhMkpDdHZlNWFLOFVWYU9Xakdwb0JjClN0Tk5xUWdsYkZmWWNoQVprb0VC
-            K3J1WDc2NlFsanQwVXg0T1VLYXR2MGsKLS0tIGlBVUNKblRZTzBCZXo2MVdPL1dm
-            RllEYVRkTjUyYU5OdUtUMkNzOUVDQUUKTt7PtbBKBRTGzwc6JkjE3gIcRZZUTDqi
-            xLBiPu/xpozlfS1UlCuUnCnfJWvlvMZaHydUNshVZ1AIEmA/WEyNkg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkN2xQWVByTjZKSnBWY1Za
+            RVBYTDFhU1ZYczNWc0JnRU5OT2JBRG9QbTJzCmp0VHJiK25SUGlEVXV3NlFBcHNt
+            bXZOUlNOWWlFUlhPZjJpWElaY3dEQkkKLS0tIDF6a2lUSGlBL0d1SjlmUVlPek4w
+            QXZwb0dtaWkrdzMzb0V1RkpMQlhhc1UKNMCwcqeWQd/ckoFasaRsDLl4g1UJgw6T
+            FyKqoBYMMX6l+6DHykmIndgsNEs6Iq+2+Rwcadv7ii6q2f8/3Dq3SQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-03-17T20:59:57Z"
-    mac: ENC[AES256_GCM,data:/Df4f/3RjJgPqzEQmXo06RyEtpp1paWWL8UQaT7gQac+3iRhlm4/e3VUpibHp/FyPpd7aOj7+UYySq8t34JAZB8eG/ImUgnEDlssQcFViKLegw7ksN+8aIkJ3klOtZ6KMMttgaw9+FL6rqTLycEC6DKe+Clxo0XGNCYAdwsXw24=,iv:t3oyFA6XY2V+PsHViai6rxk8A9d9HZU3OO0wOszI6vI=,tag:2gxCNrRzwg86p5RqtqSu/Q==,type:str]
+    lastmodified: "2026-03-22T03:21:38Z"
+    mac: ENC[AES256_GCM,data:4FYsIWNOPoEX12qniFCG1Uab08SSayrvZDSCyXDI5fN4fcg0OEj3j8PQeHT8csRHh1wt5FK8EaeYTzhB6OqHb2fZgnmpsh1LeL710RvhmNQexZ5NGj41AV6JuvA+QvDrxvfND+ZfyOdl5NMClMA+Efxd0sqCpFfNtuyV/1KmEJ8=,iv:2pkQ8HlnO9JB5ahguG1WH+mBOWy4Tv9ktSg2/aQ8ljs=,tag:98pDfwgS5UN+2/i2OnbL9Q==,type:str]
     encrypted_regex: ^(data|stringData)$
     version: 3.11.0

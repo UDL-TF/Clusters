@@ -5,20 +5,20 @@ metadata:
     name: minio-creds
     namespace: minio
 stringData:
-    ROOT_USER: ENC[AES256_GCM,data:xkyaI1HL,iv:OzSuiW5gBGR2NE9i4xnqm6FZJaCVsES8SA1O4mI86Pc=,tag:Enf393DndXyevAgIoCOJVQ==,type:str]
-    ROOT_PASSWORD: ENC[AES256_GCM,data:zXCgT1rYq/9k27LDkzwTcEVq1ZKdXKrR7EPBYo9ETGDRoVkK11/P,iv:t+OmZz9G/hFFXqNF/sSXAFfKEgu6suBDj+ns254mlQU=,tag:ZENQ9p3W5ctDd7Afb0DHww==,type:str]
+    ROOT_USER: ENC[AES256_GCM,data:4hdiPWPB,iv:H7fXNJ0kj3o3lhLHqg5QTbU9rsIhPG+9kwwsYUUQB38=,tag:O29SRnXPsg0GDTlUPMxqIg==,type:str]
+    ROOT_PASSWORD: ENC[AES256_GCM,data:VkLwN6HOrv1PS7HSu0GxtkssqidqyF3AnKVLBRLkS/S2vX88dX9T,iv:8oCWqZuye0kObOPTljDOMCYDiH2zt9tVMycb7fkM1gA=,tag:9aQRlakIr+Ya/wNkdQ5x6A==,type:str]
 sops:
     age:
         - recipient: age1ck89m855d05rfv8dn2m6uf7htuqth9rhzw6glnz3k7mhhnfghf6qnkughe
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBDVkwwNWdDeWlLSk82QWhT
-            UXBiNFZ1Q0JIUHQxaVgxNVZDTFBwaTh2UFRBCnArM01wSlZySms4d1ZOSVp1dm1m
-            VWFDK3d5V29ONHkvK2YzWjFBdlpzMzAKLS0tIEd0WG5zOEFEbFZXN3dJaFZlVDJK
-            dzkwMWlJY214V3crVG5FU0REVm1CY2sKg/RRFrYgJKBWprFeTUw6ih//8MXNaTr3
-            gcGR5bYyrDMzvlQic16RLe9+lOqGC1zTsUbWQ8dBxDdbd6/H58+c7w==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBiMnJlNWRsV2xqOEdPbk9E
+            M1dsRExmRE40cFBabzFJWVl5UUZwbE1XWnlzCi8wZzdrQTdTTk8xdnI3K0VVeTRC
+            VUdMeWh4Sm41YzZsaGRESlpTYngvd2sKLS0tIHpUbm9tMTgxdE8yNXRyZWM5TU9I
+            WDdvYUZvQnpoRlJQakh3NVpieC8wTWMKjOjRmfqCRqmCm26OOHW9bSg+ZIQ3IfFx
+            rs7zAq8hlFRp3WOhoF5FkQb5L/2MKAUsx11mg4njPhhEYwnbzU0EPg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-03-17T20:59:57Z"
-    mac: ENC[AES256_GCM,data:Ja6lKtwuxftmHaAcTGw7EpSL2hoEMSKd8U0OrkPDhhKU/ebCJdpP2TnZbSbwb1s0SrNKlgATg6U9eQgaUGLlYmfGPjf6jTfNVqA9pry4Z9chmiFrm+lb+E8tiOA3Kai1xvoAAcrwK2MZVJVdKjJHkifXvb2bCjNnZeEx/GT87B8=,iv:qP4Q6FP6zI5uRo/QSh5xYBPxxWErb18LEcjPwRwIeHc=,tag:Yqab6OlOj9yp8gOZ0BPSLA==,type:str]
+    lastmodified: "2026-03-22T03:21:38Z"
+    mac: ENC[AES256_GCM,data:qSR/ZCszdjiktpJLWLnJqZi6F7wEOkQpFaJa2PfWwVeWka/WqLtpNt4cSOMZAQEtS/nAoh6iy4NS3uOaAtaLmJRvmC0QJJJyzVErJEFUAv0gfyhtMh8QyQzpMhWe6Gcq3BpLWudoB3b+ZmK0iOFfUQRNuYgToiSukclPlIxpmjM=,iv:fsxQtn9ZYhMzMWND/xaO4EEmjOPIL+2CDSa/BryRtaM=,tag:15KUWG7O5/CrvRy1roliEw==,type:str]
     encrypted_regex: ^(data|stringData)$
     version: 3.11.0
