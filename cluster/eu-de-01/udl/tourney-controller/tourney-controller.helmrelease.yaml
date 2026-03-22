@@ -13,45 +13,39 @@ spec:
   values:
     image:
       repository: ghcr.io/udl-tf/tourney-controller
-      tag: "build-23" # {"$imagepolicy": "flux-system:tourney-controller:tag"}
+      tag: "build-24" # {"$imagepolicy": "flux-system:tourney-controller:tag"}
       pullPolicy: Always
-
     nameOverride: "tourney-controller"
     fullnameOverride: "tourney-controller"
-
     serviceAccount:
       create: true
-
     controllerConfig:
       namespace: "udl"
       pollInterval: 30s
       chartPath: oci://ghcr.io/udl-tf/charts/tf2chart:0.3.0
       matchStatuses:
-        - 0        # Active matches to process
+        - 0 # Active matches to process
       matchCompletedStatuses:
-        - 3        # Completed status for orphaned server cleanup
+        - 3 # Completed status for orphaned server cleanup
       divisionFilters:
         - "EU"
       defaultMap: tfdb_octagon_udl_v4
       hostNetwork: true
       notificationsEnabled: true
       notificationsLinkFormat: /matches/%d
-
     database:
       name: citadel_prod
       host: postgres.citadel.svc.cluster.local
       passwordKey: DB_PASSWORD
       existingSecret:
-        name: postgres-creds  
+        name: postgres-creds
         key: POSTGRES_PASSWORD
         userKey: POSTGRES_USER
-
     ports:
       game: "30000-30299"
       sourcetv: "30300-30599"
       client: "30600-30899"
       steam: "30900-31199"
-
     srcds:
       tickRate: 128
       maxPlayersOverride: 0
@@ -61,7 +55,6 @@ spec:
         key: ""
       passwordLength: 10
       rconLength: 46
-
     steam:
       apiKeySecret:
         name: "steam-api"
@@ -70,6 +63,5 @@ spec:
       autoTokens: true
       tokenCleanup: true
       tokenMemoTemplate: "UDL Match %d Round %d"
-
     tf2Chart:
       values: {}
