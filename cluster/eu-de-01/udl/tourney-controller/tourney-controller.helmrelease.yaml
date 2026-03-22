@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: ghcr.io/udl-tf/tourney-controller
-      tag: "latest" # {"$imagepolicy": "flux-system:tourney-controller:tag"}
+      tag: "build-23" # {"$imagepolicy": "flux-system:tourney-controller:tag"}
       pullPolicy: Always
 
     nameOverride: "tourney-controller"

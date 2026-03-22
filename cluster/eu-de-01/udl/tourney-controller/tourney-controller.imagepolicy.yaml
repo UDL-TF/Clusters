@@ -1,4 +1,3 @@
----
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
 metadata:
@@ -6,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: api-udl
+    name: tourney-controller
   filterTags:
     pattern: '^build-(?P<build_number>\d+)$'
     extract: '$build_number'
