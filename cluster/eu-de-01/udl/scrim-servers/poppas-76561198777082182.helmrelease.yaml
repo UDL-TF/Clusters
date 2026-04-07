@@ -11,6 +11,8 @@ spec:
   interval: 1m
   targetNamespace: udl
   values:
+    replicaCount: 0
+
     workload:
       kind: Deployment
       nameOverride: "poppas-76561198777082182"

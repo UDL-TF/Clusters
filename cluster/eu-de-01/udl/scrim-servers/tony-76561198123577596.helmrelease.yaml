@@ -11,6 +11,8 @@ spec:
   interval: 1m
   targetNamespace: udl
   values:
+    replicaCount: 0
+
     workload:
       kind: Deployment
       nameOverride: "tony-76561198123577596"
