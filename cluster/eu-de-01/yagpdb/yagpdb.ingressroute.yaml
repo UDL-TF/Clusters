@@ -1,0 +1,44 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: yagpdb-ingressroute
+  namespace: yagpdb
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`yagpdb.udl.tf`)
+      kind: Rule
+      services:
+        - name: yagpdb
+          port: 80
+  tls:
+    secretName: yagpdb-tls
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: yagpdb-redirect
+  namespace: yagpdb
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`yagpdb.udl.tf`)
+      kind: Rule
+      middlewares:
+        - name: redirect-to-https
+          namespace: yagpdb
+      services:
+        - name: api@internal
+          kind: TraefikService
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-to-https
+  namespace: yagpdb
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true

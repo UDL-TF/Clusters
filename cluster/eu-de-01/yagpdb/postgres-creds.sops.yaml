@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: postgres-creds
+    namespace: yagpdb
+type: Opaque
+stringData:
+    POSTGRES_DB: ENC[AES256_GCM,data:Uo26XVAv,iv:YDXBtkycyxB9yBB0POuRRSTxHjMW0pMYQltLLErJ7fs=,tag:1eglqDVPBUc8mvHrNnaK6Q==,type:str]
+    POSTGRES_USER: ENC[AES256_GCM,data:3lEB/30B,iv:d5ybG3ceSFJP1CYnToedP6zzfBqOqk1OGVUJc8fJI9Y=,tag:Lfm150OiLQsHhcuHnjG6kQ==,type:str]
+    POSTGRES_PASSWORD: ENC[AES256_GCM,data:vRdiXVCvPidiV6qFaauQDf8g8ierU+YT57Q=,iv:4o7pCBYYm+DseaQYC5VhqfbaU8a6bFsB7sOfC/dx0FA=,tag:a/bcoGDygwhVyRSBf+LN6w==,type:str]
+sops:
+    age:
+        - recipient: age1ck89m855d05rfv8dn2m6uf7htuqth9rhzw6glnz3k7mhhnfghf6qnkughe
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBUME1pS0JuanB6ZkRhM0FR
+            enZyL2VQZURtUXdxWjNNZk5rOEZVcmVKRndFClBMTTRFdmpCdXhQSTI3VEZoMkRu
+            TkRMT1ErZDlwWnNldTlDTWl5ODNVL0EKLS0tIEg3OFU5MlgwVjdpRzQ2OUVyUkFH
+            c01HcWJncmYyUXhxOWxPOGFIT1l5aUUK+SqQwkIR6OxTYhRRxzH8Zm2aRSOC0++D
+            rACda5fBvbd0jqzI4sHfQzLD9F2mtbAKkVKtpwKDZ9xyyjCG2G2blg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-12T09:06:37Z"
+    mac: ENC[AES256_GCM,data:OCj/laJ8+Mva2L1NsJxryCzB7op5ai8Mbkc6D4rBP2CfW2OEBIrW6TJkYe8JL9Qid+L7BetmGeEIoz0rM6CHy9xSOxu4rXcKqN0Ge1ILdb79RjwA8RSXh7KGgpCjfipGiTGbyDRvfVS0Q9/Rp8bn5/9rBhUTctbJCzttrTRyFoQ=,iv:RYRehdjb1ECJdkztg4idL7eaOyBZzv74bBR5RPLpPRo=,tag:2XzzwZtg6G+ONYX0wo5h6Q==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0
